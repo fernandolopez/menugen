@@ -5,6 +5,9 @@ description = "Generate FreeDesktop XDG menu entries for programs installed in t
 authors = ["'Fernando López' <'fernando.e.lopez@gmail.com'>"]
 license = "Apache-2.0"
 
+[tool.poetry.scripts]
+menugen = "menugen.menugen:main"
+
 [tool.poetry.dependencies]
 python = "^3.9"
 python-magic = "^0.4.24"

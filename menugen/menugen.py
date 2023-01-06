@@ -20,19 +20,25 @@ handlers = [
     for handler in handler_set
 ]
 
-menus = []
 
-for apps_path in apps_paths:
-    for subdir in apps_path.iterdir():
-        print(subdir)
-        for handler in handlers:
-            menu = handler.handle(subdir)
-            if menu:
-                menus.extend(menu)
-                break
+def main():
+    menus = []
 
-shutil.rmtree(menu_path)
-menu_path.mkdir(parents=True, exist_ok=True)
-for menu in menus:
-    with open(menu_path / f"{menu.name}.desktop", "w") as f:
-        f.write(menu.export())
+    for apps_path in apps_paths:
+        for subdir in apps_path.iterdir():
+            print(subdir)
+            for handler in handlers:
+                menu = handler.handle(subdir)
+                if menu:
+                    menus.extend(menu)
+                    break
+
+    shutil.rmtree(menu_path)
+    menu_path.mkdir(parents=True, exist_ok=True)
+    for menu in menus:
+        with open(menu_path / f"{menu.name}.desktop", "w") as f:
+            f.write(menu.export())
+
+
+if __name__ == "__main__":
+    main()
